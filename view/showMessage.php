@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {
     <link href="../Styling/style.css" rel="stylesheet">
 </head>
 <body>
-<?php
+    <?php
     include __DIR__."/navigation/adminNavBar.php";
     ?>
     <div class="sidebar">
@@ -32,7 +32,7 @@ if (isset($_GET['id'])) {
     <div class="main-content">
         <div class="container mt-5">
             <h2 class="text-center">Message Details</h2>
-            <form method="POST" > 
+            <form> 
                 <div class="form-group">
                     <label for="id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>" readonly>
@@ -51,9 +51,9 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="form-group">
                     <label for="lastmodified">Message</label>
-                    <textarea  class="form-control" id="msg" name="msg" readonly><?php echo htmlspecialchars($message->getMsg()); ?></textarea>
+                    <textarea  class="form-control" id="msg" rows="4"  name="msg" readonly><?php echo htmlspecialchars($message->getMsg()); ?></textarea>
                 </div>
-                <!-- <button class="btn btn-primary">Reply</button> -->
+                <a href="../view/sendReply.php?id=<?php echo urlencode($_GET['id']); ?>" class="btn btn-primary">Reply</a>
             </form>
         </div>
     </div>

@@ -13,7 +13,7 @@
     <link href="../Styling/style.css" rel="stylesheet">
 </head>
 <body>
-<?php
+    <?php
     include __DIR__."/navigation/adminNavBar.php";
     ?>
     <div class="sidebar">
