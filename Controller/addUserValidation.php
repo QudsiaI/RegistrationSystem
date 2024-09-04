@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($valid) {
         $user->create($name, $email, $pass);
 
-        if (isset($_POST['isAdmin'])) {
+        if (isset($_POST['fromAdmin'])) {
             header("Location: ../view/userDataAdmin.php");
             exit();
         } else {

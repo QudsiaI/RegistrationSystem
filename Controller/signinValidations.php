@@ -38,8 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if($valid){
-        // echo "test 1 " . $_POST['Password']." ";
-        // exit();
         $user->signin($email,$pass);
     }
 }

@@ -27,7 +27,7 @@ $total_users = $user->countUsers();
     </div>
     <div class="main-content">
         <div class="container mt-5">
-            <img src="../Images/addUser.png" alt="Add User" style="width: 30px; height: 30px;" data-toggle="modal" data-target="#exampleModal">
+            <img src="../Images/addUser.png" alt="Add User" style="width: 30px; height: 30px; cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -57,7 +57,7 @@ $total_users = $user->countUsers();
                                     <small class="text-danger"><?php echo $passErr; ?></small>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Add User</button>
-                                <input type="hidden" name="isAdmin" value="true">
+                                <input type="hidden" name="fromAdmin" value="true">
                             </form>
                         </div>
                         <div class="modal-footer">
