@@ -33,8 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if($valid){
         $signinResult = $user->signin($email,$pass);
-        // echo $signinResult;
-        // exit();
         if($signinResult !== true){
             header("Location: ../view/signinForm.php");
             exit();

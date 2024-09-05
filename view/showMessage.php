@@ -30,31 +30,35 @@ if (isset($_GET['id'])) {
         <?php include "navigation/adminSideNav.php";?>
     </div>
     <div class="main-content">
-        <div class="container mt-5">
-            <h2 class="text-center">Message Details</h2>
-            <form> 
-                <div class="form-group">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>" readonly>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-8 form">
+                    <h2 class="text-center">Message Details</h2>
+                    <form> 
+                        <div class="form-group">
+                            <label for="id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Username</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($message->getName()); ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($message->getEmail()); ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastmodified">Sent Date</label>
+                            <input type="text" class="form-control" id="sentTime" name="sentTime" value="<?php echo htmlspecialchars($message->getTime()); ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastmodified">Message</label>
+                            <textarea  class="form-control" id="msg" rows="4"  name="msg" readonly><?php echo htmlspecialchars($message->getMsg()); ?></textarea>
+                        </div>
+                        <a href="../view/sendReply.php?id=<?php echo urlencode($_GET['id']); ?>" class="btn btn-primary">Reply</a>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="name">Username</label>
-                    <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($message->getName()); ?>" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($message->getEmail()); ?>" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="lastmodified">Sent Date</label>
-                    <input type="text" class="form-control" id="sentTime" name="sentTime" value="<?php echo htmlspecialchars($message->getTime()); ?>" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="lastmodified">Message</label>
-                    <textarea  class="form-control" id="msg" rows="4"  name="msg" readonly><?php echo htmlspecialchars($message->getMsg()); ?></textarea>
-                </div>
-                <a href="../view/sendReply.php?id=<?php echo urlencode($_GET['id']); ?>" class="btn btn-primary">Reply</a>
-            </form>
+            </div>
         </div>
     </div>
 

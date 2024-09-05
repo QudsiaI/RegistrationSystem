@@ -46,45 +46,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include "navigation/adminSideNav.php";?>
     </div>
     <div class="main-content">
-        <div class="container mt-5">
-            <h2 class="text-center">Edit User</h2>
-            <form method="POST" > 
-                <div class="form-group">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>" readonly>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-8 form">
+                    <h2 class="text-center">Edit User</h2>
+                    <form method="POST" > 
+                        <div class="form-group">
+                            <label for="id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Username</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($user->getName()); ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($user->getEmail()); ?>" required>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control" id="password" name="password" value="<?php echo htmlspecialchars($password); ?>" readonly>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select class="form-control" id="role" name="role"  required>
+                                <option value="user" <?php echo ($user->getRole() == '0') ? 'selected' : ''; ?>>User</option>
+                                <option value="admin" <?php echo ($user->getRole() == '1') ? 'selected' : ''; ?>>Admin</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" id="status" name="status" required>
+                                <option value="active" <?php echo ($user->getStatus() == '0') ? 'selected' : ''; ?>>Active</option>
+                                <option value="inactive" <?php echo ($user->getStatus() == '1') ? 'selected' : ''; ?>>Inactive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastmodified">Last Modified</label>
+                            <input type="text" class="form-control" id="lastmodified" name="lastmodified" value="<?php echo htmlspecialchars($user->getDate()); ?>" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="name">Username</label>
-                    <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($user->getName()); ?>" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($user->getEmail()); ?>" required>
-                </div>
-                <!-- <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="text" class="form-control" id="password" name="password" value="<?php echo htmlspecialchars($password); ?>" readonly>
-                </div> -->
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <select class="form-control" id="role" name="role"  required>
-                        <option value="user" <?php echo ($user->getRole() == '0') ? 'selected' : ''; ?>>User</option>
-                        <option value="admin" <?php echo ($user->getRole() == '1') ? 'selected' : ''; ?>>Admin</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select class="form-control" id="status" name="status" required>
-                        <option value="active" <?php echo ($user->getStatus() == '0') ? 'selected' : ''; ?>>Active</option>
-                        <option value="inactive" <?php echo ($user->getStatus() == '1') ? 'selected' : ''; ?>>Inactive</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="lastmodified">Last Modified</label>
-                    <input type="text" class="form-control" id="lastmodified" name="lastmodified" value="<?php echo htmlspecialchars($user->getDate()); ?>" readonly>
-                </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
+            </div>
         </div>
     </div>
 </body>

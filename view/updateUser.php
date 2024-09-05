@@ -35,7 +35,7 @@ include "../Controller/editProfileValidations.php";
                                 <label for="profilePic" class="btn btn-secondary">Upload New Picture</label>
                                 <input type="file" id="profilePic" name="profilePic" accept="image/*" style="display: none;">
                             </div>
-                            <input type="text" class="form-control" value="<?php echo $profilePicPath; ?>" readonly>
+                            <!-- <input type="text" class="form-control" value="<?php echo $profilePicPath; ?>" readonly> -->
                         </div>
                         <div class="form-group">
                             <label for="Username">Username</label>
@@ -63,6 +63,24 @@ include "../Controller/editProfileValidations.php";
             </div>
         </div>
     </div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 
+<script>
+    function togglePassword() {
+    var passwordField = document.getElementById('Password');
+    var passwordIcon = document.getElementById('password-icon');
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        passwordIcon.classList.remove('fa-eye');
+        passwordIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = 'password';
+        passwordIcon.classList.remove('fa-eye-slash');
+        passwordIcon.classList.add('fa-eye');
+    }
+}
+</script>
 </body>
 </html>

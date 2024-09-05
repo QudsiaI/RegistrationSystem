@@ -20,15 +20,19 @@ include '../Controller/ini_db.php';
         <?php include "navigation/adminSideNav.php";?>
     </div>
     <div class="main-content">
-        <div class="container mt-5">
-            <form action="../Controller/sendReply.php" method="POST">
-                <div class="form-group">
-                    <label for="reply">Your Reply</label>
-                    <textarea class="form-control" id="reply" name="reply" placeholder="Enter reply" rows="4" required></textarea>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6 form">
+                    <form action="../Controller/sendReply.php" method="POST">
+                        <h2>Your Reply</h2>
+                        <div class="form-group">
+                            <textarea class="form-control" id="reply" name="reply" placeholder="Enter reply" rows="8" required></textarea>
+                        </div>
+                        <input type="hidden" id="msgId" name="msgId" value="<?php echo $_GET['id']; ?>">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
                 </div>
-                <input type="hidden" id="msgId" name="msgId" value="<?php echo $_GET['id']; ?>">
-                <button type="submit" class="btn btn-primary">Send</button>
-            </form>
+            </div>
         </div>
     </div>
 </body>

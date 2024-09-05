@@ -57,7 +57,7 @@ unset($_SESSION['passErr']);
 
                     <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                 </form>
-                <p class="text-center mt-3">Already have an account? <a href="signinForm.php">Sign in</a></p>
+                <p class="text-center mt-3">Already have an account? <a href="view/signinForm.php">Sign in</a></p>
             </div>
         </div>
 

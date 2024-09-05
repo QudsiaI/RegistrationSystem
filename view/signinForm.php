@@ -21,7 +21,7 @@ include ("../Controller/signinRedirect.php");
 <body>
 <!-- Sign In Form -->
 <div class="row justify-content-center mt-5">
-    <div class="col-md-6">
+    <div class="col-md-4 form">
         <h2 class="text-center">Sign In</h2>
         <form method="POST" action="../Controller/signinValidations.php">
             <div class="form-group">
@@ -41,7 +41,7 @@ include ("../Controller/signinRedirect.php");
             </div>
             <button type="submit" class="btn btn-primary btn-block" id="signin" name="signin">Sign In</button>
         </form>
-        <p class="text-center mt-3">Don't have an account? <a href="signupForm.php">Sign up</a></p>
+        <p class="text-center mt-3">Don't have an account? <a href="../signupForm.php">Sign up</a></p>
     </div>
 </div>
 

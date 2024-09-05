@@ -3,13 +3,7 @@ class User{
 
     protected $conn;
 
-    protected $id;
-    protected $username;
-    protected $email;
-    protected $password;
-    protected $is_admin;
-    protected $is_active;
-    protected $dateModified;
+    protected $id, $username, $email, $password, $is_admin, $is_active, $dateModified;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -89,19 +83,18 @@ class User{
             $stmt->bind_result($hashed_password, $name, $role);
             $stmt->fetch();
             
-            $this->username = $name;
             // Verify the password
             if (password_verify($pass, $hashed_password)) {
                 // Set session variables
                 // echo $email;
                 $_SESSION['role']=$role;
                 if($role=="admin"){
-                    $_SESSION['name']=$this->username;
+                    $_SESSION['name']=$name;
                     $_SESSION['email']=$email;
                     header("Location: ../view/adminHome.php");
                     exit();
                 }elseif($role=="user"){
-                    $_SESSION['name']=$this->username;
+                    $_SESSION['name']=$name;
                     $_SESSION['email']=$email;
                     header("Location: ../view/Home.php");
                     exit();

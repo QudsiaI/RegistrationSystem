@@ -3,11 +3,11 @@ class Message{
 
     protected $con;
 
-    protected $id;
-    protected $email;
-    protected $name;
-    protected $message;
-    protected $timestamp;
+    protected $id,$email,$name,$message,$timestamp;
+    // protected $email;
+    // protected $name;
+    // protected $message;
+    // protected $timestamp;
 
     public function __construct($con){
         $this->con = $con;
