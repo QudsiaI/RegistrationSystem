@@ -6,13 +6,6 @@ $passErr = isset($_SESSION['passErr']) ? $_SESSION['passErr'] : '';
 unset($_SESSION['emailErr']);
 unset($_SESSION['passErr']);
 
-if(isset($_GET['error'])){
-    echo "<script>alert('".$_GET['error']."');</script>";
-}
-if(isset($_GET['msg'])){
-    echo "<script>alert('".$_GET['msg']."');</script>";
-}
-
 include ("../Controller/signinRedirect.php");
 ?>
 <!DOCTYPE html>

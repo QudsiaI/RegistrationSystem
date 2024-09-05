@@ -15,30 +15,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $valid = true;
     if (empty($_POST['Email'])) {
         $_SESSION['emailErr'] = "Email is Required";
-        header("Location: ../view/signinForm.php?error=Email+is+Required");
-        exit();
         $valid = false;
     } else {
         $email = $user->sanitizeData($_POST['Email']);
         // Regex validation
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['emailErr'] = "Invalid email format";
-            header("Location: ../view/signinForm.php?error=Invalid+email+format");
-            exit();
             $valid = false;
         }
     }
     if (empty($_POST['Password'])) {
         $_SESSION['passErr'] = "Password is Required";
-        header("Location: ../view/signinForm.php?error=Password+is+Required");        
-        exit();
         $valid = false;
     } else {
         $pass = $user->sanitizeData($_POST['Password']);
     }
     
     if($valid){
-        $user->signin($email,$pass);
+        $signinResult = $user->signin($email,$pass);
+        // echo $signinResult;
+        // exit();
+        if($signinResult !== true){
+            header("Location: ../view/signinForm.php");
+            exit();
+        }
+    }else{
+        header("Location: ../view/signinForm.php");
+        exit();
     }
 }
 ?>

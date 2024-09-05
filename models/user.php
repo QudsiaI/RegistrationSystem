@@ -48,20 +48,34 @@ class User{
     }
     // Create a new user
     public function create($name, $email, $pass) {
-        
+        // Check if the email already exists
+        $checkEmailQuery = "SELECT u_id FROM users WHERE email = ?";
+        $stmt = $this->conn->prepare($checkEmailQuery);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
+    
+        if ($stmt->num_rows > 0) {
+            $stmt->close();
+            return "email_exists";  // Return a specific code to handle this case
+        }
+    
+        $stmt->close();
+    
+        // If email is not taken, proceed with the insertion
         $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
         $stmt = $this->conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $name, $email, $hashed_password);
-
-        // Execute query
+    
         if ($stmt->execute()) {
             $stmt->close();
             return true;
-        }else{
+        } else {
             $stmt->close();
             return false;
         }
     }
+    
 
     public function signin($email,$pass){
         // echo "<script>alert('".$email."')</script>";
@@ -89,7 +103,6 @@ class User{
                 }elseif($role=="user"){
                     $_SESSION['name']=$this->username;
                     $_SESSION['email']=$email;
-                    
                     header("Location: ../view/Home.php");
                     exit();
                 }
@@ -99,16 +112,14 @@ class User{
                 return true;
                 
             } else {
-                $passErr = "Invalid password";
-                header("Location: ../view/signinForm.php?error=Invalid+password");
+                $_SESSION["passErr"] = "Incorrect password";
                 $stmt->close();
-                return false;
+                return "Incorrect password";
             }
         } else {
-            $emailErr = "No account found with this email";
-            header("Location: ../view/signinForm.php?error=No+account+found+with+this+email");
+            $_SESSION["emailErr"] = "No account found with this email";
             $stmt->close();
-            return false;
+            return "No account found with this email";
         }
 
         

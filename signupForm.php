@@ -1,6 +1,14 @@
 <?php
 session_start();
-
+if(isset($_SESSION['name']) && isset($_SESSION['email'])){
+    if(isset($_SESSION["role"])){
+        if($_SESSION["role"]=="admin"){
+            header("Location: ../view/adminHome.php");
+        }elseif($_SESSION["role"]=="user"){
+            header("Location: ../view/Home.php");
+        }
+    }
+}
 $nameErr = isset($_SESSION['nameErr']) ? $_SESSION['nameErr'] : '';
 $emailErr = isset($_SESSION['emailErr']) ? $_SESSION['emailErr'] : '';
 $passErr = isset($_SESSION['passErr']) ? $_SESSION['passErr'] : '';
@@ -29,12 +37,12 @@ unset($_SESSION['passErr']);
                     <div class="form-group">
                         <label for="Username">Username</label>
                         <input type="text" class="form-control" id="Username" name="Username" placeholder="Enter your username">
-                        <small class="text-danger"><?php echo $nameErr; ?></small>
+                        <small class="text-danger" id="nameErr"><?php echo $nameErr; ?></small>
                     </div>
                     <div class="form-group">
                         <label for="Email">Email address</label>
                         <input type="email" class="form-control" id="Email" name="Email" placeholder="Enter your email">
-                        <small class="text-danger"><?php echo $emailErr; ?></small>
+                        <small class="text-danger" id="emailErr"><?php echo $emailErr; ?></small>
                     </div>
                     <div class="form-group">
                         <label for="Password">Password</label>
@@ -44,7 +52,7 @@ unset($_SESSION['passErr']);
                                 <i id="password-icon" class="fa fa-eye"></i>
                             </span>
                         </div>
-                        <small class="text-danger"><?php echo $passErr; ?></small>
+                        <small class="text-danger" id="passErr"><?php echo $passErr; ?></small>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Sign Up</button>

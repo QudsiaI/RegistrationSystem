@@ -3,7 +3,14 @@ include '../Controller/checkSession.php';
 include '../Controller/ini_db.php';
 include_once '../models/user.php';
 
-$nameErr = $name = $emailErr = $email = $passErr = $pass = "";
+$name = $email = $pass = "";
+$nameErr = isset($_SESSION['nameErr']) ? $_SESSION['nameErr'] : '';
+$emailErr = isset($_SESSION['emailErr']) ? $_SESSION['emailErr'] : '';
+$passErr = isset($_SESSION['passErr']) ? $_SESSION['passErr'] : '';
+unset($_SESSION['nameErr']);
+unset($_SESSION['emailErr']);
+unset($_SESSION['passErr']);
+
 $user = new User($conn);
 
 $total_users = $user->countUsers();
