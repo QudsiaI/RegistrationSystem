@@ -125,17 +125,7 @@ class User{
     
         // Prepare the statement
         $stmt = $this->conn->prepare($query);
-    
-        if ($stmt === false) {
-            die("Failed to prepare the statement: " . $this->conn->error);
-        }
-    
-        // Sanitize input
-        $username = htmlspecialchars(strip_tags($username));
-        $email = htmlspecialchars(strip_tags($email));
-        $role = htmlspecialchars(strip_tags($role));
-        $status = htmlspecialchars(strip_tags($status));
-    
+        
         // Bind data
         $stmt->bind_param('sssss', $username, $email, $role, $status, $id);
 

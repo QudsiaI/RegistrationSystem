@@ -62,16 +62,13 @@ class Message{
     }
     
     public function addMessage($name, $email, $message) {
-        $this->email = $email;
-        $this->name = $name;
-        $this->message = $message;
         $query = "INSERT INTO contact_messages (email, username, message) VALUES (?, ?, ?)";
         $stmt = $this->con->prepare($query);
         if ($stmt === false) {
             die("Error preparing statement: " . $this->con->error);
         }
     
-        $stmt->bind_param('sss', $this->email, $this->name, $this->message);
+        $stmt->bind_param('sss', $email, $name, $message);
     
         if ($stmt->execute()) {
             $stmt->close();
@@ -94,7 +91,7 @@ class Message{
 
             $this->name = $username;
             $this->email = $email;
-            $this->message = $message;
+            $this->message = htmlspecialchars($message);
             $this->timestamp = $submitted_at;
 
         } else {

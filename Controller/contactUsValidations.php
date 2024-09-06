@@ -1,34 +1,33 @@
 <?php
+include "../Controller/ini_db.php";
+include_once "../Controller/checkSession.php";
+include_once '../models/contact_message.php';
+
 $name = $_SESSION['name'];
 $email = $_SESSION['email'];
 
-include_once '../models/contact_message.php';
-
-$messageErr ="";
-$message = ""; 
-$success = false;
-$conn = new mysqli($servername, $username, $password, $dbname);
 $msg = new Message($conn);
+$errors = [];
+$data = [];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $valid = true;
-    if (empty($_POST['message'])) {
-        $messageErr = "Message is Required";
-        $valid = false;
+// Validate the message field
+if (empty($_POST['message'])) {
+    $errors['message'] = 'Message is required.';
+}
+
+if (!empty($errors)) {
+    $data['success'] = false;
+    $data['errors'] = $errors;
+} else {
+    $message = htmlspecialchars($_POST['message'], ENT_QUOTES, 'UTF-8'); // Prevent XSS attacks
+    if ($msg->addMessage($name, $email, $message)) {
+        $data['success'] = true;
+        $data['message'] = 'Your message has been successfully sent!';
     } else {
-        $message = $msg->testData($_POST['message']);
-        if (!preg_match("/^[a-zA-Z0-9 @.,'\"()]*$/", $message)) {
-            $messageErr = "Only letters, spaces, numbers, and special characters (@,.''\"()) are allowed";
-            $valid = false;
-        }
-    }
-    if($valid){
-        if($msg->addMessage($name, $email, $message)){
-            $success = true;
-            $message = ""; // Clear the message after success
-        }
+        $data['success'] = false;
+        $data['message'] = 'There was an error saving your message. Please try again.';
     }
 }
 
-
+echo json_encode($data);
 ?>
