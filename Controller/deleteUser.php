@@ -1,22 +1,25 @@
 <?php
-include '../Controller/checkSession.php';
+include '../Controller/checkSession.php'; 
 include '../Controller/ini_db.php';
 require_once '../models/User.php';
-$conn = new mysqli($servername, $username, $password, $dbname);
-// echo $username;
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['u_id'])) {
-    $user = new User($conn);
-    $u_id = intval($_POST['u_id']); // Sanitize input
 
-    if ($user->deleteFromId($u_id)) {
-        header("Location: ../view/userDataAdmin.php?msg=User+deleted+successfully");
-        exit();
+// header('Content-Type: application/json');
+
+$user = new User($conn);
+$result_array = [];
+
+if (isset($_POST['u_id'])) { 
+    $id = $_POST['u_id']; 
+    
+    if ($user->deleteFromId($id)) { 
+        echo json_encode(['success' => true]);
+
     } else {
-        header("Location: ../view/userDataAdmin.php?error=Unable+to+delete+user");
-        exit();
+        echo json_encode(['success' => false, 'message' => 'Failed to delete user']); 
     }
 } else {
-    header("Location: ../view/userDataAdmin.php?error=Invalid+request");
-    exit();
+    echo json_encode(['success' => false, 'message' => 'User ID not provided']); 
 }
+// header("Location: ../view/adminUserData.php");
+// exit();
 ?>

@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 include_once "../models/User.php";
 include ("ini_db.php");
 $nameErr = $name = $emailErr = $email = $passErr = $pass = "";
@@ -9,12 +7,12 @@ $user = new User($conn);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $valid = true;
-    if (empty($_POST['Username'])) {
+    if (empty($_POST['username'])) {
         $_SESSION['nameErr'] = "Name is Required";
         // $error = $_SESSION['nameErr'];
         $valid = false;
     } else {
-        $name = $user->sanitizeData($_POST['Username']);
+        $name = $user->sanitizeData($_POST['username']);
         // Regex validation
         if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
             $_SESSION['nameErr'] = "Invalid name format";
@@ -23,12 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if (empty($_POST['Email'])) {
+    if (empty($_POST['email'])) {
         $_SESSION['emailErr'] = "Email is Required";
         // $error = $error." ".$_SESSION['emailErr'];
         $valid = false;
     } else {
-        $email = $user->sanitizeData($_POST['Email']);
+        $email = $user->sanitizeData($_POST['email']);
         // Email validation
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['emailErr'] = "Invalid email format";
@@ -50,8 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($createUserResult === true) {
             if (isset($_POST['fromAdmin'])) {
-                header("Location: ../view/userDataAdmin.php");
-                exit();
+                echo json_encode(['success' => true]);
             } else {
                 $_SESSION["name"] = $name;
                 $_SESSION["email"] = $email;
@@ -62,8 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['emailErr'] = "Email already exists";
             // $error = $error." ".$_SESSION['emailErr'];
             if (isset($_POST['fromAdmin'])) {
-                header("Location: ../view/userDataAdmin.php");
-                exit();
+                echo json_encode(['success' => false, 'message' => 'Email already exists']);
             } else {
                 header("Location: ../signupForm.php");
                 exit();
@@ -71,8 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }   
     }else{
         if (isset($_POST['fromAdmin'])) {
-            header("Location: ../view/userDataAdmin.php");
-            exit();
+            echo json_encode(['success' => false, 'message' => 'User Not Added']);
         } else {
             header("Location: ../signupForm.php");
             exit();

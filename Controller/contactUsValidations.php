@@ -19,7 +19,7 @@ if (!empty($errors)) {
     $data['success'] = false;
     $data['errors'] = $errors;
 } else {
-    $message = htmlspecialchars($_POST['message'], ENT_QUOTES, 'UTF-8'); // Prevent XSS attacks
+    $message = htmlspecialchars($_POST['message']);
     if ($msg->addMessage($name, $email, $message)) {
         $data['success'] = true;
         $data['message'] = 'Your message has been successfully sent!';
@@ -29,5 +29,5 @@ if (!empty($errors)) {
     }
 }
 
-echo json_encode($data);
+// echo json_encode($data);
 ?>

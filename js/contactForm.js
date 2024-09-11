@@ -36,5 +36,5 @@ $(document).ready(function () {
             $("form").html('<div class="alert alert-danger">Could not reach server, please try again later.</div>');
         });
     });
-    console.log("Contact Form Script Loaded");
+    // console.log("Contact Form Script Loaded");
 });

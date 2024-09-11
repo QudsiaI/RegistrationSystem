@@ -35,13 +35,13 @@ unset($_SESSION['passErr']);
                 <h2 class="text-center">Sign Up</h2>
                 <form method="POST" action="Controller/addUserValidation.php">
                     <div class="form-group">
-                        <label for="Username">Username</label>
-                        <input type="text" class="form-control" id="Username" name="Username" placeholder="Enter your username">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
                         <small class="text-danger" id="nameErr"><?php echo $nameErr; ?></small>
                     </div>
                     <div class="form-group">
-                        <label for="Email">Email address</label>
-                        <input type="email" class="form-control" id="Email" name="Email" placeholder="Enter your email">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
                         <small class="text-danger" id="emailErr"><?php echo $emailErr; ?></small>
                     </div>
                     <div class="form-group">
